@@ -84,10 +84,10 @@ export default function Dashboard() {
           <CardContent className="flex-1 overflow-auto pr-2">
             <div className="space-y-6">
               {warehouses.map((wh) => {
-                 const currentStock = wh.inventory.reduce((sum, item) => sum + item.quantity, 0);
-                 const percentage = (currentStock / wh.capacity) * 100;
-                 
-                 return (
+                const currentStock = wh.inventory.reduce((sum, item) => sum + item.quantity, 0);
+                const percentage = (currentStock / wh.capacity) * 100;
+
+                return (
                   <div key={wh.id} className="flex flex-col space-y-2">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-2">
@@ -97,21 +97,21 @@ export default function Dashboard() {
                       <span className="font-mono text-xs text-muted-foreground">{currentStock} / {wh.capacity}</span>
                     </div>
                     <div className="w-full bg-secondary h-2 rounded-full overflow-hidden">
-                      <div 
-                        className="bg-primary h-full rounded-full transition-all duration-1000 ease-out" 
+                      <div
+                        className="bg-primary h-full rounded-full transition-all duration-1000 ease-out"
                         style={{ width: `${percentage}%` }}
                       ></div>
                     </div>
                   </div>
-                 );
+                );
               })}
             </div>
           </CardContent>
           <div className="p-6 pt-0 mt-auto border-t border-border/50">
-             <div className="pt-4 flex justify-between items-center text-sm text-muted-foreground">
-                <span>Updated: Just now</span>
-                <span className="flex items-center hover:text-primary cursor-pointer transition-colors">View detailed report <ArrowUpRight className="ml-1 h-3 w-3" /></span>
-             </div>
+            <div className="pt-4 flex justify-between items-center text-sm text-muted-foreground">
+              <span>Updated: Just now</span>
+              <span className="flex items-center hover:text-primary cursor-pointer transition-colors">View detailed report <ArrowUpRight className="ml-1 h-3 w-3" /></span>
+            </div>
           </div>
         </Card>
       </div>

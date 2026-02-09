@@ -1,19 +1,19 @@
 import { useState, useMemo, useEffect } from "react";
 import { warehouses as initialWarehouses, Product, type Warehouse } from "@/lib/mockData";
-import { 
-  Table, 
-  TableBody, 
-  TableCell, 
-  TableHead, 
-  TableHeader, 
-  TableRow 
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow
 } from "@/components/ui/table";
-import { 
-  Card, 
-  CardContent, 
-  CardHeader, 
-  CardTitle, 
-  CardDescription 
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -84,7 +84,7 @@ export default function Inventory() {
     }
     return initialWarehouses;
   });
-  
+
   const [activeWarehouseId, setActiveWarehouseId] = useState(initialWarehouses[0].id);
   const [searchTerm, setSearchTerm] = useState("");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -139,7 +139,7 @@ export default function Inventory() {
         if (editingProduct) {
           return {
             ...wh,
-            inventory: wh.inventory.map(p => 
+            inventory: wh.inventory.map(p =>
               p.id === editingProduct.id ? { ...p, ...values } : p
             )
           };
@@ -191,7 +191,7 @@ export default function Inventory() {
     return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(amount);
   };
 
-  const activeWarehouse = useMemo(() => 
+  const activeWarehouse = useMemo(() =>
     warehouses.find(wh => wh.id === activeWarehouseId) || warehouses[0],
     [warehouses, activeWarehouseId]
   );
@@ -199,8 +199,8 @@ export default function Inventory() {
   const filteredInventory = useMemo(() => {
     const products = activeWarehouse.inventory;
     if (!searchTerm) return products;
-    return products.filter(p => 
-      p.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
+    return products.filter(p =>
+      p.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       p.sku.toLowerCase().includes(searchTerm.toLowerCase())
     );
   }, [activeWarehouse, searchTerm]);
@@ -213,26 +213,26 @@ export default function Inventory() {
           <p className="text-muted-foreground">Manage stock levels across all distribution centers.</p>
         </div>
         <div className="flex items-center gap-2">
-           <Button variant="outline" size="sm">
+          <Button variant="outline" size="sm">
             <Download className="mr-2 h-4 w-4" />
             Export CSV
-           </Button>
-           <Button variant="default" size="sm" onClick={handleOpenAdd}>
+          </Button>
+          <Button variant="default" size="sm" onClick={handleOpenAdd}>
             <Plus className="mr-2 h-4 w-4" /> Add Product
-           </Button>
+          </Button>
         </div>
       </div>
 
-      <Tabs 
-        value={activeWarehouseId} 
-        onValueChange={setActiveWarehouseId} 
+      <Tabs
+        value={activeWarehouseId}
+        onValueChange={setActiveWarehouseId}
         className="w-full space-y-6"
       >
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
           <TabsList className="bg-muted/50 h-auto p-1 flex-wrap justify-start">
             {warehouses.map((wh) => (
-              <TabsTrigger 
-                key={wh.id} 
+              <TabsTrigger
+                key={wh.id}
                 value={wh.id}
                 className="data-[state=active]:bg-background data-[state=active]:text-primary data-[state=active]:shadow-sm"
               >
@@ -243,8 +243,8 @@ export default function Inventory() {
 
           <div className="relative w-full md:w-72">
             <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
-            <Input 
-              placeholder="Search by SKU or Name..." 
+            <Input
+              placeholder="Search by SKU or Name..."
               className="pl-8 bg-background"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
@@ -261,12 +261,12 @@ export default function Inventory() {
                   <CardDescription>{activeWarehouse.location} • ID: {activeWarehouse.id}</CardDescription>
                 </div>
                 <div className="flex gap-2">
-                   <Badge variant="secondary" className="font-mono">
-                      {activeWarehouse.inventory.length} SKUs
-                   </Badge>
-                   <Badge variant="outline" className="font-mono">
-                      {((activeWarehouse.inventory.reduce((sum, item) => sum + item.quantity, 0) / activeWarehouse.capacity) * 100).toFixed(0)}% Capacity
-                   </Badge>
+                  <Badge variant="secondary" className="font-mono">
+                    {activeWarehouse.inventory.length} SKUs
+                  </Badge>
+                  <Badge variant="outline" className="font-mono">
+                    {((activeWarehouse.inventory.reduce((sum, item) => sum + item.quantity, 0) / activeWarehouse.capacity) * 100).toFixed(0)}% Capacity
+                  </Badge>
                 </div>
               </div>
             </CardHeader>
@@ -307,17 +307,17 @@ export default function Inventory() {
                       </TableCell>
                       <TableCell className="text-right">
                         <div className="flex justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                          <Button 
-                            variant="ghost" 
-                            size="icon" 
+                          <Button
+                            variant="ghost"
+                            size="icon"
                             className="h-8 w-8 text-muted-foreground hover:text-primary"
                             onClick={() => handleOpenEdit(product)}
                           >
                             <Pencil className="h-3.5 w-3.5" />
                           </Button>
-                          <Button 
-                            variant="ghost" 
-                            size="icon" 
+                          <Button
+                            variant="ghost"
+                            size="icon"
                             className="h-8 w-8 text-muted-foreground hover:text-destructive"
                             onClick={() => setProductToDelete(product)}
                           >
