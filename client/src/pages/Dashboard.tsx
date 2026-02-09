@@ -3,7 +3,6 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { MapPin, Package, AlertCircle, TrendingUp, ArrowUpRight } from "lucide-react";
 import WarehouseMap from "@/components/WarehouseMap";
-import { motion } from "framer-motion";
 
 export default function Dashboard() {
   const totalStock = warehouses.reduce((acc, wh) => acc + wh.inventory.reduce((sum, item) => sum + item.quantity, 0), 0);
@@ -72,33 +71,7 @@ export default function Dashboard() {
             <CardDescription>Live distribution map</CardDescription>
           </CardHeader>
           <div className="relative aspect-video w-full bg-muted/20">
-            <WarehouseMap/>
-            
-            {/* Map Markers */}
-            {warehouses.map((wh, idx) => (
-              <motion.div
-                key={wh.id}
-                initial={{ scale: 0, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ delay: idx * 0.1, duration: 0.5 }}
-                className="absolute group cursor-pointer"
-                style={{ top: `${wh.coordinates.y}%`, left: `${wh.coordinates.x}%` }}
-              >
-                <div className="relative flex items-center justify-center">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary/40 opacity-75"></span>
-                  <div className="relative bg-primary text-primary-foreground p-2 rounded-full shadow-lg border-2 border-background group-hover:scale-110 transition-transform">
-                    <MapPin className="h-4 w-4" />
-                  </div>
-                  
-                  {/* Tooltip */}
-                  <div className="absolute top-full mt-2 left-1/2 -translate-x-1/2 bg-popover/95 backdrop-blur text-popover-foreground px-3 py-2 rounded-md shadow-xl border text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none">
-                    <p className="font-bold">{wh.name}</p>
-                    <p className="text-muted-foreground">{wh.location}</p>
-                    <p className="mt-1 font-mono text-primary">Cap: {((wh.inventory.reduce((s, i) => s + i.quantity, 0) / wh.capacity) * 100).toFixed(0)}%</p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
+            <WarehouseMap />
           </div>
         </Card>
 

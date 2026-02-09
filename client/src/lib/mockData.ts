@@ -1,5 +1,4 @@
 // Mock Data for Jakarta Warehouse System
-import { useState } from "react";
 
 export type ProductType = "pants" | "shirt" | "socks" | "jacket" | "hat";
 
@@ -17,7 +16,7 @@ export interface Warehouse {
   id: string;
   name: string;
   location: string;
-  coordinates: { lat: number; lng: number };
+  coordinates: { lat: number; lng: number; x: number; y: number };
   capacity: number;
   inventory: Product[];
 }
@@ -108,7 +107,7 @@ export const warehouses: Warehouse[] = [
     id: "WH-JKT-01",
     name: "Gudang Pusat Cakung",
     location: "Cakung, Jakarta Timur",
-    coordinates: { lat: -6.185, lng: 106.938 },
+    coordinates: { lat: -6.185, lng: 106.938, x: 78, y: 42 },
     capacity: 10000,
     inventory: generateInventory("WH1"),
   },
@@ -116,7 +115,7 @@ export const warehouses: Warehouse[] = [
     id: "WH-JKT-02",
     name: "Gudang Distribusi Priok",
     location: "Tanjung Priok, Jakarta Utara",
-    coordinates: { lat: -6.104, lng: 106.88 },
+    coordinates: { lat: -6.104, lng: 106.88, x: 68, y: 25 },
     capacity: 8500,
     inventory: generateInventory("WH2"),
   },
@@ -124,7 +123,7 @@ export const warehouses: Warehouse[] = [
     id: "WH-JKT-03",
     name: "Hub Logistik Kebon Jeruk",
     location: "Kebon Jeruk, Jakarta Barat",
-    coordinates: { lat: -6.197, lng: 106.769 },
+    coordinates: { lat: -6.197, lng: 106.769, x: 28, y: 48 },
     capacity: 5000,
     inventory: generateInventory("WH3"),
   },
@@ -132,7 +131,7 @@ export const warehouses: Warehouse[] = [
     id: "WH-JKT-04",
     name: "Penyimpanan Tebet",
     location: "Tebet, Jakarta Selatan",
-    coordinates: { lat: -6.229, lng: 106.858 },
+    coordinates: { lat: -6.229, lng: 106.858, x: 56, y: 68 },
     capacity: 4000,
     inventory: generateInventory("WH4"),
   },
@@ -140,7 +139,7 @@ export const warehouses: Warehouse[] = [
     id: "WH-JKT-05",
     name: "Gudang Transit Tanah Abang",
     location: "Tanah Abang, Jakarta Pusat",
-    coordinates: { lat: -6.187, lng: 106.811 },
+    coordinates: { lat: -6.187, lng: 106.811, x: 44, y: 50 },
     capacity: 6000,
     inventory: generateInventory("WH5"),
   },

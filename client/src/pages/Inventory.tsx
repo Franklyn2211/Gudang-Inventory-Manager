@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect } from "react";
-import { warehouses as initialWarehouses, Product, ProductType } from "@/lib/mockData";
+import { warehouses as initialWarehouses, Product, type Warehouse } from "@/lib/mockData";
 import { 
   Table, 
   TableBody, 
@@ -73,11 +73,11 @@ type ProductFormValues = z.infer<typeof productSchema>;
 
 export default function Inventory() {
   const { toast } = useToast();
-  const [warehouses, setWarehouses] = useState(() => {
+  const [warehouses, setWarehouses] = useState<Warehouse[]>(() => {
     const saved = localStorage.getItem(STORAGE_KEY);
     if (saved) {
       try {
-        return JSON.parse(saved);
+        return JSON.parse(saved) as Warehouse[];
       } catch (e) {
         return initialWarehouses;
       }

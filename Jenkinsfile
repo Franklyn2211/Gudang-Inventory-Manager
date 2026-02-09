@@ -1,12 +1,22 @@
 pipeline {
   agent any
 
+  tools {
+    nodejs 'node-23'
+  }
+
   options {
     timestamps()
     disableConcurrentBuilds()
   }
 
   stages {
+    stage('Env') {
+      steps {
+        sh 'node -v && npm -v'
+      }
+    }
+
     stage('Checkout') {
       steps {
         checkout scm
