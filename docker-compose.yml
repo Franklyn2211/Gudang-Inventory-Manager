@@ -1,36 +1,10 @@
 services:
-  db:
-    image: postgres:latest
+  app:
+    build: .
+    container_name: gudang_app
     environment:
-      POSTGRES_USER: appuser
-      POSTGRES_PASSWORD: apppass
-      POSTGRES_DB: appdb
-    volumes:
-      - db_data:/var/lib/postgresql/data
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U appuser -d appdb"]
-      interval: 5s
-      timeout: 5s
-      retries: 10
-
-  server:
-    build: ./server
-    environment:
-      DATABASE_URL: postgresql://appuser:apppass@db:5432/appdb
-      NODE_ENV: development
+      NODE_ENV: production
       PORT: 9090
     ports:
       - "9090:9090"
-    depends_on:
-      db:
-        condition: service_healthy
-
-  client:
-    build: ./client
-    ports:
-      - "3001:80"
-    depends_on:
-      - server
-
-volumes:
-  db_data:
+    restart: unless-stopped
